@@ -1,0 +1,14 @@
+{% extends "easyblog/base.html" %}
+{% load paginator %}
+{% block content %}
+	{% if posts %}        
+	    {% for post in posts %}
+        {% include "easyblog/posts/article.html" %}
+	    {% endfor %}      
+      {% if posts.has_other_pages %}
+        {% include "easyblog/snippets/bootstrap-paginator.html" with page=posts centered="yes" only %}        
+      {% endif %}
+	{% else %}
+	    <p>No posts available.</p>
+	{% endif %}
+{% endblock %}

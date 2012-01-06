@@ -1,0 +1,10 @@
+<article class="blog.post">
+    <h3><a href="{% url easyblog.views.detail post.id %}">{{ post.title }}</a></h3>        
+    <p>
+        <small>Posted by {{ post.user.username }} on {{ post.publish_date }}</small>
+    </p>
+    <p>
+    {{ post.body|linebreaks|truncatewords_html:100 }}    
+    </p>        
+    <p style="text-align: right"><a href="{% url easyblog.views.detail post.id %}">Read More</a></p>
+</article>

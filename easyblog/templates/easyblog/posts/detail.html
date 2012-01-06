@@ -1,0 +1,7 @@
+{% extends "easyblog/base.html" %}
+{% block keywords %}{{ post.keywords }}{% endblock %}
+{% block author %}{{ post.user.get_full_name }}{% endblock %}
+{% block description %}{{ post.description }}{% endblock %}
+{% block content %}
+    {% include "easyblog/posts/article-detail.html" %}
+{% endblock %}

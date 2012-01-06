@@ -1,0 +1,12 @@
+<article class="blog.post">    
+    <h1>{{ post.title }}</h1>   
+    {{ post.body|linebreaks }}  
+    {% if post.tags.all %}
+    <aside class="blog.post.tags">
+        <strong>Tags:</strong>
+        {% for tag in post.tags.all %}
+            <a href="{% url easyblog.views.tagsearch tag.name %}">{{ tag.name }}</a>{% if not forloop.last %},{% endif %}
+        {% endfor %}        
+    </aside>
+    {% endif %}
+</article>

@@ -1,0 +1,6 @@
+{% extends "easyblog/posts/index.html" %}
+
+{% block content %}
+   <p>All posts tagged: {{ tag.name }}</p>
+   {{ block.super }}
+{% endblock %}
