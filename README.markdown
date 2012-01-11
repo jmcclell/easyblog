@@ -6,4 +6,4 @@ knowledge well at hand!
 
 ## Dependencies
 * Django's contrib-admin application
-* django-dilla ([https://github.com/areski/django-dilla](https://github.com/areski/django-dilla))
+* [django-dilla](https://github.com/areski/django-dilla) [optional: used for data generation during testing]
