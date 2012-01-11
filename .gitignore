@@ -1,1 +1,4 @@
 /easyblog.db
+/.project
+/.pydevproject
+/*.pyc/*.pyo/*$py.class
