@@ -1,7 +1,6 @@
 import logging
 
 from django import template
-from django.core.paginator import Page
 
 logger = logging.getLogger(__name__)
 

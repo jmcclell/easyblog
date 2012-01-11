@@ -128,9 +128,21 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',    
     'django.contrib.admin',    
-    'django.contrib.admindocs',    
+    'django.contrib.admindocs',
+    'django_markdown',    
     'easyblog',
+    'dilla', 
 )
+
+# Dilla Settings
+
+DICTIONARY = "C:\\Development\\linux.words"
+DILLA_USE_LOREM_IPSUM = False # set to True ignores dictionary
+DILLA_APPS = ['easyblog']
+DILLA_EXCLDE_MODELS = ['easyblog.PostStatus']
+DILLA_SPAMLIBS = ['sample.dilla.custom']
+        
+                      
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -145,18 +157,48 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'     
         }
     },
     'loggers': {
+        'django': {
+            'handlers':['console'],
+            'level':'INFO',
+        },   
         'django.request': {
             'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
+            'level': 'INFO',
+            'propagate': False,
         },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        'easyblog': {
+            'handlers': ['mail_admins','console'],
+            'level': 'DEBUG' if DEBUG else 'ERROR'
+        },
+        'dilla': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        }
     }
 }
