@@ -13,8 +13,8 @@ class Tag(models.Model):
     class Dilla():
         field_extras = {
             'name': {
-                'word_range': (1,3),
-                'spaces': False                
+                'word_count':1,
+                'spaces':False                
             }
         }
 
@@ -80,6 +80,13 @@ class Post(models.Model):
     class Meta:
         ordering = ["publish_date"]
         get_latest_by = "publish_date"
+        
+    class Dilla():
+        field_extras = {
+            'follows': {
+                'generator': None              
+            }
+        }
         
     
 

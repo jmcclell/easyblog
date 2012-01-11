@@ -140,7 +140,6 @@ DICTIONARY = "C:\\Development\\linux.words"
 DILLA_USE_LOREM_IPSUM = False # set to True ignores dictionary
 DILLA_APPS = ['easyblog']
 DILLA_EXCLDE_MODELS = ['easyblog.PostStatus']
-DILLA_SPAMLIBS = ['sample.dilla.custom']
         
                       
 
