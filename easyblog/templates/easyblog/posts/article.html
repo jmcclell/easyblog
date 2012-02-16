@@ -1,10 +1,10 @@
 <article class="blog.post">
-    <h3><a href="{% url easyblog.views.detail post.id %}">{{ post.title }}</a></h3>        
+    <h3><a href="{% url easyblog.views.detail post.get_url_info.year post.get_url_info.month post.get_url_info.day post.get_url_info.slug %}">{{ post.title }}</a></h3>        
     <p>
         <small>Posted by {{ post.user.username }} on {{ post.publish_date }}</small>
     </p>
     <p>
     {{ post.body|linebreaks|truncatewords_html:100 }}    
     </p>        
-    <p style="text-align: right"><a href="{% url easyblog.views.detail post.id %}">Read More</a></p>
+    <p style="text-align: right"><a href="{% url  easyblog.views.detail post.get_url_info.year post.get_url_info.month post.get_url_info.day post.get_url_info.slug %}">Read More</a></p>
 </article>

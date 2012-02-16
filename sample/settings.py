@@ -41,7 +41,7 @@ TIME_ZONE = 'America/Chicago'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-SITE_ID = 1
+#SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -123,15 +123,13 @@ TEMPLATE_DIRS = (
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
+    'django.contrib.sessions',    
     'django.contrib.messages',
     'django.contrib.staticfiles',    
     'django.contrib.admin',    
     'django.contrib.admindocs',
     'django_markdown',    
-    'easyblog',
-    'dilla', 
+    'easyblog'
 )
 
 # Dilla Settings

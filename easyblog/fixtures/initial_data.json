@@ -4,8 +4,9 @@
         "model": "easyblog.poststatus", 
         "fields": {
             "name": "Published",
-            "ordering": 1,
-            "is_live": 0
+            "ordering": 0,
+            "is_live": 1,
+            "default": 1
         }
     },
     {
@@ -13,8 +14,9 @@
         "model": "easyblog.poststatus", 
         "fields": {
             "name": "Draft",
-            "ordering": 0,
-            "is_live": 1
+            "ordering": 1,
+            "is_live": 0,
+            "default": 1
         }
     }
 ]
