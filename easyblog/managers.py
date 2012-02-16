@@ -9,9 +9,6 @@ class PostStatusLiveManager(models.Manager):
         return super(PostStatusLiveManager, self).get_query_set().filter(
             is_live=True
         )
-        
-    def get_default_status(self):        
-        return self.model.objects.filter(default=True)[:1]
 
 class PostLiveManager(models.Manager):
     def get_query_set(self):

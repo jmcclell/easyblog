@@ -1,7 +1,10 @@
 from datetime import datetime
+
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+
+from taggit.managers import TaggableManager
 
 from easyblog import managers
 
@@ -22,6 +25,9 @@ class Author(User):
     
     class Meta:
         proxy = True
+
+def get_default_post_status():
+    return PostStatus.objects.filter(default=True)[:1]
 
 class PostStatus(models.Model):    
     """ Status of the post, eg: published, draft, etc. """
@@ -105,10 +111,11 @@ class Post(models.Model):
     publish_date = models.DateTimeField('publish date', db_index=True,
                                         null=True, blank=True, 
                                         default=timezone.now())
-    status = models.ForeignKey(PostStatus, null=False, blank=True, default=managers.PostStatusLiveManager.get_default_status)
+    status = models.ForeignKey(PostStatus, null=False, blank=True, default=get_default_post_status)
     follows = models.ForeignKey('self', null=True, blank=True, unique=True, verbose_name='previous post in series')    
     keywords = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    tags = TaggableManager(blank=True)
     
    
     def is_edited(self):        

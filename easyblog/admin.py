@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.template.defaultfilters import slugify
-from easyblog.models import Post, PostStatus, Category
+from easyblog.models import Post, PostStatus, Category, Author, get_default_post_status
     
 class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Article', {'fields': ['title', 'slug', 'body', 'excerpt']}),
         ('Publishing', {'fields': ['status', 'publish_date']}), 
-        ('Meta Data', {'fields': ['keywords', 'description']}),
+        ('Meta Data', {'fields': ['category', 'tags', 'keywords', 'description']}),
         ('Series', {'fields': ['follows']})
     ]
     list_display = ('title', 'created_on', 'modified_on',
@@ -19,13 +19,13 @@ class PostAdmin(admin.ModelAdmin):
     
     
     def save_model(self, request, obj, form, change):
-        if not change:
-            obj.user = request.user
+        if not change:            
+            obj.author = Author.objects.get(pk=request.user.pk)
             if not obj.slug:
                 obj.slug = slugify(obj.title)
                 
             if not obj.status:
-                obj.status = PostStatus.live_statuses.get_default_status()
+                obj.status = get_default_post_status()
                 
                 
         obj.save()
