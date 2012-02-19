@@ -9,7 +9,7 @@ class PostAdmin(admin.ModelAdmin):
         ('Meta Data', {'fields': ['category', 'tags', 'keywords', 'description']}),
         ('Series', {'fields': ['follows']})
     ]
-    list_display = ('title', 'created_on', 'modified_on',
+    list_display = ('title', 'get_absolute_url', 'created_on', 'modified_on',
                     'publish_date', 'author', 'status', 'is_edited', 'is_live')
     list_filter = ['status', 'publish_date', 'author',
                    'created_on', 'modified_on']

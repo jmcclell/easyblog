@@ -8,6 +8,20 @@ from taggit.managers import TaggableManager
 
 from easyblog import managers
 
+
+class MyTaggableManager(TaggableManager):
+    """
+    This class is necessary so that django-dilla can spam the db for testing.
+    It serves no other purpose.
+    
+    #TODO A better approach might be to fork django-taggit and add this method
+          to the codebase
+    """
+    def get_internal_type(self):
+        return "Field"
+    
+    
+    
 class Author(User):    
     """ Proxy model representing the author, extending User """
     
@@ -27,7 +41,7 @@ class Author(User):
         proxy = True
 
 def get_default_post_status():
-    return PostStatus.objects.filter(default=True)[:1]
+    return PostStatus.objects.filter(default=True)[:1].get()
 
 class PostStatus(models.Model):    
     """ Status of the post, eg: published, draft, etc. """
@@ -115,11 +129,11 @@ class Post(models.Model):
     follows = models.ForeignKey('self', null=True, blank=True, unique=True, verbose_name='previous post in series')    
     keywords = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    tags = TaggableManager(blank=True)
+    tags = MyTaggableManager(blank=True)
     
    
     def is_edited(self):        
-        return not self.modified_on == self.created_on
+        return not self.modified_on is None
     is_edited.short_description = 'edited?'
     is_edited.boolean = True
     
@@ -128,17 +142,30 @@ class Post(models.Model):
     is_live.short_description = 'live?'
     is_live.boolean = True
     
+    @models.permalink
+    def get_absolute_url(self):
+        #return ('easyblog_post_detail', (), {
+        #    'year': self.created_on.strftime('%Y'),
+        #    'month': self.created_on.strftime('%m'),
+        #    'day': self.created_on.strftime('%d'),
+        #    'slug': self.slug})
+        return ('easyblog_post_detail', (), {
+            'year': self.publish_date.strftime('%Y'),
+            'month': self.publish_date.strftime('%m'),
+            'day': self.publish_date.strftime('%d'),
+            'slug': self.slug})
+    get_absolute_url.short_description = 'URL'
+    
+    
     #@TODO Implement related in such a way that it returns the top X posts with the most tags in common
     def get_related(self, count=5):
         pass
     
     def save(self, *args, **kwargs):
         if self.pk is None:
-            self.created_on = datetime.utcnow()
+            self.created_on = timezone.now()
         else:
-            self.modified_on = datetime.utcnow()
-        
-        #TODO Convert publish_date to UTC if it is another timezone
+            self.modified_on = timezone.now()
                             
         super(Post, self).save(*args, **kwargs)
      

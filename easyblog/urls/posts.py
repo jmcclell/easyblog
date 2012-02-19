@@ -21,7 +21,7 @@ urlpatterns = patterns(
         name='easyblog_post_archive_day'),
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
         'post_detail', 
-        name='easyblog_post_archive_detail'),
+        name='easyblog_post_detail'),
     url(r'^(?P<object_id>\d+)/$',
         'post_byid',
         name='easyblog_post_byid'),

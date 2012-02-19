@@ -35,7 +35,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/New_York'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -130,16 +130,18 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django_markdown',    
     'taggit',
+    'dilla',
     'easyblog'
 )
 
 # Dilla Settings
 
+# If you're on linux, you'll have a dictionary avail. On windows, download one.
 DICTIONARY = "C:\\Development\\linux.words"
 DILLA_USE_LOREM_IPSUM = False # set to True ignores dictionary
 DILLA_APPS = ['easyblog']
-DILLA_EXCLDE_MODELS = ['easyblog.PostStatus']
-        
+DILLA_EXCLUDE_MODELS = ['easyblog.PostStatus']
+DILLA_SPAMLIBS = ['sample.dilla_spamlib']        
                       
 
 # A sample logging configuration. The only tangible logging
