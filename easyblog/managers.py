@@ -1,7 +1,9 @@
 """ EasyBlog Model Managers and helpers """
-from datetime import datetime
-
+from django.utils import timezone
 from django.db import models
+
+# Because of a circular dependency, we can't import models specifically
+import easyblog
 
 class PostStatusLiveManager(models.Manager):
     def get_query_set(self):
@@ -13,6 +15,7 @@ class PostStatusLiveManager(models.Manager):
 class PostLiveManager(models.Manager):
     def get_query_set(self):
         """Return posts that are live (ie: their PostStatus is a Live status and their publish date has past)"""
-        return super(PostLiveManager, self).get_query_set().filter(status__in=PostLiveManager().all(),
-                                                                   publish_on__lte=datetime.utcnow())
+        return super(PostLiveManager, self).get_query_set().filter(status__in=easyblog.models.PostStatus.live_statuses.all(),
+                                                                   publish_date__lte=timezone.now())
+
 

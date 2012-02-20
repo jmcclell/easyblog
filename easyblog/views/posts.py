@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.date_based import archive_year
 from django.views.generic.date_based import archive_month
 from django.views.generic.date_based import archive_day
-from django.views.generic.date_based import archive_index
+from django.views.generic.dates import ArchiveIndexView
 from django.views.generic.date_based import object_detail
 
 
@@ -50,15 +50,14 @@ def posts_by_year(request, year,page):
                       page=page)
 
 def posts_index(request, page=None):
-    posts = Post.live.all().order_by('-publish_date')
+    #posts = Post.live.all().order_by('-publish_date')
+    posts = Post.objects.all().order_by('-publish_date')
    
     return archive_index(request, posts, date_field='publish_date',
                          num_latest=settings.POSTS_PER_PAGE,
                           template_name='easyblog/posts/archive.html',
                           allow_future=settings.ALLOW_FUTURE,
-                          allow_empty=settings.ALLOW_EMPTY,
-                          paginate_by=settings.POSTS_PER_PAGE,
-                          month_format='%m',)
+                          allow_empty=settings.ALLOW_EMPTY,)
     
 def post_detail(request):
     posts = Post.live.all().order_by('-publish_date')

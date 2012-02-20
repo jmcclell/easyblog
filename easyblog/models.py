@@ -1,12 +1,10 @@
-from datetime import datetime
-
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
 from taggit.managers import TaggableManager
 
-from easyblog import managers
+from easyblog.managers import PostLiveManager, PostStatusLiveManager
 
 
 class MyTaggableManager(TaggableManager):
@@ -18,7 +16,7 @@ class MyTaggableManager(TaggableManager):
           to the codebase
     """
     def get_internal_type(self):
-        return "Field"
+        return "ManyToManyField"
     
     
     
@@ -48,7 +46,7 @@ class PostStatus(models.Model):
     
     # Manager which will return only statuses which are "live"
     objects = models.Manager()
-    live_statuses = managers.PostStatusLiveManager()
+    live_statuses = PostStatusLiveManager()
     
     name = models.CharField(max_length=255, unique=True)    
     ordering = models.IntegerField(null=False, blank=False, unique=True)
@@ -67,7 +65,7 @@ class PostStatus(models.Model):
         super(PostStatus, self).save(*args, **kwargs)
     
     def __unicode__(self):
-        return self.name
+        return self.name    
     
     class Meta:
         ordering = ["ordering"]
@@ -88,16 +86,23 @@ class Category(models.Model):
     @property
     def tree_path(self):
         if self.parent:
+            return '%s/%s' % (self.parent.tree_path, self.name)
+        else:
+            return self.name
+        
+    @property
+    def tree_path_slug(self):
+        if self.parent:
             return '%s/%s' % (self.parent.tree_path, self.slug)
         else:
             return self.slug
-
+        
     def __unicode__(self):
         return self.name
 
     @models.permalink
     def get_absolute_url(self):
-        return ('easyblog_category_detail', (self.path,))
+        return ('easyblog_category_detail', (self.tree_path_slug,))
 
     class Meta:
         ordering = ['name']
@@ -109,7 +114,7 @@ class Category(models.Model):
 class Post(models.Model):
     
     objects = models.Manager()
-    live = managers.PostLiveManager()
+    live = PostLiveManager()
     #related = managers.PostRelatedManager
     
     title = models.CharField(max_length=255)
@@ -174,7 +179,7 @@ class Post(models.Model):
 
     
     class Meta:
-        ordering = ["publish_date"]
+        ordering = ["-publish_date"]
         get_latest_by = "publish_date"
     
 

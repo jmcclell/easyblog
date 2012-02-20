@@ -2,7 +2,7 @@
     <ul>    
     {% if page.has_previous %}  
         <li class="prev">
-            <a href="?{{page_param|default:"page"}}={{page.previous_page_number}}">{{previous_label|default:"&larr; Previous"}}</a>
+            <a href="{{url_suffix|default:"?page="}}{{page.previous_page_number}}">{{previous_label|default:"&larr; Previous"}}</a>
         </li>
     {% else %}
         <li class="prev disabled">
@@ -11,12 +11,12 @@
     {% endif %}
     {% for pagenum in page.paginator.page_range %}    
         <li{% if page.number == pagenum %} class="active"{% endif %}>
-            <a href="?{{page_param|default:"page"}}={{pagenum}}">{{pagenum}}</a>
+            <a href="{{url_suffix|default:"?page="}}{{pagenum}}">{{pagenum}}</a>
         </li>
     {% endfor %}
     {% if page.has_next %}
         <li class="next">
-            <a href="?{{page_param|default:"page"}}={{page.next_page_number}}">{{next_label|default:"Next &rarr;"}}</a>
+            <a href="{{url_suffix|default:"?page="}}{{page.next_page_number}}">{{next_label|default:"Next &rarr;"}}</a>
         </li>
     {% else %}
         <li class="next disabled">
