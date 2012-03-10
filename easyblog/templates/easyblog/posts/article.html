@@ -1,7 +1,7 @@
 <article class="blog.post">
     <h3><a href="#">{{ post.title }}</a></h3>        
     <p>
-        <small>Posted under {{ post.category.tree_path }} by {{ post.author.username }} on {{ post.publish_date }}</small>
+        <small>Posted under {{ post.category.tree_path|default:"Uncategorized" }} by {{ post.author.username }} on {{ post.publish_date }}</small>
     </p>
     <p>
     {{ post.body|linebreaks|truncatewords_html:100 }}    

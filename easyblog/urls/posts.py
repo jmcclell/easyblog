@@ -35,4 +35,4 @@ urlpatterns = patterns(
     url(r'^(?P<object_id>\d+)/$',
         'post_byid',
         name='easyblog_post_byid'),
-    )
+)

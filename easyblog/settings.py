@@ -7,7 +7,7 @@ a separator, add it here. Templates will automatically insert the post title
 and other information into the title, as well. (this behavior can be
 overridden in the templates themselves)
 """
-STATIC_TITLE = getattr(settings, 'EASYBLOG_STATIC_TTILE', 'Easy Blog')
+STATIC_TITLE = getattr(settings, 'EASYBLOG_STATIC_TTILE', 'Easy Blog - ')
 
 """
 These keywords will show up in your HTML's keywords meta tag
@@ -32,7 +32,7 @@ POST_PREVIEW_WORD_COUNT = getattr(settings, 'EASYBLOG_POST_PREVIEW_WORD_COUNT', 
 """
 Defines how many posts show per page
 """
-POSTS_PER_PAGE = getattr(settings, 'EASYBLOG_POSTS_PER_PAGE', 10)
+POSTS_PER_PAGE = getattr(settings, 'EASYBLOG_POSTS_PER_PAGE', 3)
 
 """
 """
