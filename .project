@@ -3,6 +3,7 @@
 	<name>EasyBlog</name>
 	<comment></comment>
 	<projects>
+		<project>django-bootstrap-pagination</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
