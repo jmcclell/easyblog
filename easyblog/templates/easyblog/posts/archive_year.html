@@ -1,0 +1,4 @@
+{% extends "easyblog/posts/archive.html" %}
+{% block pagination %}
+    {% include "easyblog/posts/archive_pager.html" with url_view_name="easyblog_post_archive_year_paginated" %}
+{% endblock %}

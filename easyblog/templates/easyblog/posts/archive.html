@@ -1,12 +1,12 @@
 {% extends "easyblog/base.html" %}
-{% load bootstrap_pagination %}
 {% block content %}
     {% if posts %}        
         {% for post in posts %}
         {% include "easyblog/posts/article.html" %}
         {% endfor %}      
-      {% if page_obj and page_obj.has_other_pages %}
-          {% bootstrap_pager page_obj url_view_name="easyblog_post_archive_index_paginated" previous_title="Newer Posts" next_title="Older Posts" previous_label="Newer Posts" next_label="Older Posts" %}
+      {% if page_obj and page_obj.has_other_pages %}          
+          {% block pagination %}
+          {% endblock %}
       {% endif %}
     {% else %}
         {% block noposts %}
