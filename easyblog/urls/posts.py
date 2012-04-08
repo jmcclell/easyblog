@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 
-from easyblog.views.posts import archive_index_view, archive_month_view, archive_year_view, archive_day_view
+from easyblog.views.posts import archive_index_view, archive_month_view, archive_year_view, archive_day_view, date_detail_view
 
 #TODO Can I reduce each of these into a single regexp for both paginated and non-paginated view?
 urlpatterns = patterns(
@@ -24,6 +24,8 @@ urlpatterns = patterns(
         name='easyblog_post_archive_day'),
     url(r'^archive/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/page/(?P<page>\d+)/$', archive_day_view,    
         name='easyblog_post_archive_day_paginated'),
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>\w[\-\w]*)/$', date_detail_view, 
+        name='easyblog_post_detail'),
 )
 
 

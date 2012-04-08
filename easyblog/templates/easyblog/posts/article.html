@@ -1,10 +1,10 @@
 <article class="blog.post">
-    <h3><a href="#">{{ post.title }}</a></h3>        
+    <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>        
     <p>
         <small>Posted under {{ post.category.tree_path|default:"Uncategorized" }} by {{ post.author.username }} on {{ post.publish_date }}</small>
     </p>
     <p>
     {{ post.body|linebreaks|truncatewords_html:100 }}    
     </p>        
-    <p style="text-align: right"><a href="#">Read More</a></p>
+    <p style="text-align: right"><a href="{{ post.get_absolute_url }}">Read More</a></p>
 </article>

@@ -70,3 +70,10 @@ archive_day_view = PostDayArchiveView.as_view(
     month_format='%m'                 
 )
 
+date_detail_view = DateDetailView.as_view(
+    date_field='publish_date',
+    queryset=Post.live.all(),
+    context_object_name='post',
+    template_name='easyblog/posts/detail.html',
+    month_format='%m'                             
+)
