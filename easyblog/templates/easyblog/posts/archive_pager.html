@@ -1,2 +1,3 @@
 {% load bootstrap_pagination %}
-{% bootstrap_pager page_obj url_view_name=url_view_name url_extra_kwargs=request.GET.dict previous_title="Newer Posts" next_title="Older Posts" previous_label="Newer Posts" next_label="Older Posts" %} 
+{{ foo }}
+{% bootstrap_pager page_obj url_view_name=url_view_name url_extra_kwargs=url_extra_kwargs previous_title="Newer Posts" next_title="Older Posts" previous_label="Newer Posts" next_label="Older Posts" %} 
